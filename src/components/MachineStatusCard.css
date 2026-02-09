@@ -1,0 +1,114 @@
+:root {
+  --success-600: #16a34a;
+  --success-50: #ecfdf5;
+
+  --idle-600: #2563eb;
+  --idle-50: #eff6ff;
+
+  --danger-600: #dc2626;
+  --danger-50: #fef2f2;
+
+  --neutral-600: #6b7280;
+  --neutral-50: #f3f4f6;
+
+  --text-900: #0f172a;
+  --text-700: #334155;
+  --text-500: #64748b;
+
+  --radius-xl: 16px;
+  --radius-full: 999px;
+}
+
+.machineStatusCard {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-xl);
+  padding: 18px 22px;
+}
+
+.machineHeader {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-700);
+  margin-bottom: 6px;
+}
+
+.machineTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-900);
+}
+
+.machineSub {
+  font-size: 13px;
+  color: var(--text-500);
+  margin-bottom: 12px;
+}
+
+/* Bloc état */
+.statusBox {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #f8fafc;
+  margin-bottom: 10px;
+}
+
+.statusIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+.statusIcon.ko { background: var(--neutral-600); }
+.statusIcon.idle { background: var(--idle-600); }
+.statusIcon.ok { background: var(--success-600); }
+.statusIcon.danger { background: var(--danger-600); }
+
+.statusLabel {
+  font-size: 12px;
+  color: var(--text-500);
+}
+
+.statusValue {
+  font-size: 18px;
+  font-weight: 800;
+}
+.statusValue.ko { color: var(--neutral-600); }
+.statusValue.idle { color: var(--idle-600); }
+.statusValue.ok { color: var(--success-600); }
+.statusValue.danger { color: var(--danger-600); }
+
+/* Badge */
+.statePill {
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.statePill.ko { background: var(--neutral-600); color: #fff; }
+.statePill.idle { background: var(--idle-600); color: #fff; }
+.statePill.ok { background: var(--success-600); color: #fff; }
+.statePill.danger { background: var(--danger-600); color: #fff; }
+
+/* Message */
+.statusMsg {
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.statusMsg.ko { background: var(--neutral-50); color: #1f2937; border-left: 3px solid var(--neutral-600); }
+.statusMsg.idle { background: var(--idle-50); color: #1e40af; border-left: 3px solid var(--idle-600); }
+.statusMsg.ok { background: var(--success-50); color: #065f46; border-left: 3px solid var(--success-600); }
+.statusMsg.danger { background: var(--danger-50); color: #7f1d1d; border-left: 3px solid var(--danger-600); }

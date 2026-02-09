@@ -1,0 +1,123 @@
+{
+  "version": "1.0.0",
+  "description": "WebSocket message schema for Smart Factory Simulator",
+  "envelope": {
+    "type": "string",
+    "timestamp": "ISO-8601",
+    "payload": "object"
+  },
+  "types": {
+    "MACHINE_STATUS": {
+      "payload": {
+        "factory_id": "uuid",
+        "machine_id": "uuid",
+        "machine_code": "string",
+        "state": "OFFLINE | IDLE | RUNNING | BREAKDOWN",
+        "message": "string"
+      }
+    },
+    "SESSION_START": {
+      "payload": {
+        "factory_id": "uuid",
+        "emp_id": "uuid",
+        "emp_code": "string",
+        "machine_id": "uuid",
+        "machine_code": "string"
+      }
+    },
+    "SESSION_END": {
+      "payload": {
+        "factory_id": "uuid",
+        "emp_id": "uuid",
+        "emp_code": "string",
+        "machine_id": "uuid",
+        "machine_code": "string"
+      }
+    },
+    "KPI_UPDATE": {
+      "payload": {
+        "factory_id": "uuid",
+        "machine_id": "uuid",
+        "ok": "number",
+        "bad": "number",
+        "total": "number",
+        "breakdowns": "number",
+        "qualityRate": "number",
+        "production_time": "number"
+      }
+    },
+    "LOG_EVENT": {
+      "payload": {
+        "factory_id": "uuid",
+        "emp_id": "uuid",
+        "machine_id": "uuid",
+        "level": "SUCCESS | INFO | WARN | ERROR",
+        "event_type": "string",
+        "message": "string",
+        "event_duration": "number"
+      }
+    }
+  },
+  "examples": {
+    "MACHINE_STATUS": {
+      "type": "MACHINE_STATUS",
+      "timestamp": "2026-02-03T12:00:00Z",
+      "payload": {
+        "factory_id": "a1b2c3",
+        "machine_id": "m-003",
+        "machine_code": "MACH-003",
+        "state": "RUNNING",
+        "message": "Production en cours - Machine opérationnelle"
+      }
+    },
+    "SESSION_START": {
+      "type": "SESSION_START",
+      "timestamp": "2026-02-03T12:05:00Z",
+      "payload": {
+        "factory_id": "a1b2c3",
+        "emp_id": "e-001",
+        "emp_code": "OUV001",
+        "machine_id": "m-003",
+        "machine_code": "MACH-003"
+      }
+    },
+    "SESSION_END": {
+      "type": "SESSION_END",
+      "timestamp": "2026-02-03T13:10:00Z",
+      "payload": {
+        "factory_id": "a1b2c3",
+        "emp_id": "e-001",
+        "emp_code": "OUV001",
+        "machine_id": "m-003",
+        "machine_code": "MACH-003"
+      }
+    },
+    "KPI_UPDATE": {
+      "type": "KPI_UPDATE",
+      "timestamp": "2026-02-03T12:20:00Z",
+      "payload": {
+        "factory_id": "a1b2c3",
+        "machine_id": "m-003",
+        "ok": 12,
+        "bad": 2,
+        "total": 14,
+        "breakdowns": 1,
+        "qualityRate": 85,
+        "production_time": 1480
+      }
+    },
+    "LOG_EVENT": {
+      "type": "LOG_EVENT",
+      "timestamp": "2026-02-03T12:21:40Z",
+      "payload": {
+        "factory_id": "a1b2c3",
+        "emp_id": "e-001",
+        "machine_id": "m-003",
+        "level": "SUCCESS",
+        "event_type": "MACHINE_START",
+        "message": "Machine démarrée - Production en cours",
+        "event_duration": 0
+      }
+    }
+  }
+}
