@@ -1,34 +1,23 @@
-import React from 'react'
-import TopBar from './components/TopBar.jsx'
-import ConnectionBanner from './components/ConnectionBanner.jsx'
-import NFCPanel from './components/NFCPanel.jsx'
-import MachineStatusCard from './components/MachineStatusCard.jsx'
-import ControlPanel from './components/ControlPanel.jsx'
-import SessionStats from './components/SessionStats.jsx'
-import ActivityLog from './components/ActivityLog.jsx'
-import InfoTech from './components/InfoTech.jsx'
-import UserGuide from './components/UserGuide.jsx'
-import useMachineSimulator from './hooks/useMachineSimulator.js'
-import './components/Panels.css'
-import useSupabaseRealtime from './hooks/useSupabaseRealtime'
+import React from "react";
+import TopBar from "./components/TopBar.jsx";
+import ConnectionBanner from "./components/ConnectionBanner.jsx";
+import NFCPanel from "./components/NFCPanel.jsx";
+import MachineStatusCard from "./components/MachineStatusCard.jsx";
+import ControlPanel from "./components/ControlPanel.jsx";
+import SessionStats from "./components/SessionStats.jsx";
+import ActivityLog from "./components/ActivityLog.jsx";
+import InfoTech from "./components/InfoTech.jsx";
+import UserGuide from "./components/UserGuide.jsx";
+import useMachineSimulator from "./hooks/useMachineSimulator.js";
+import "./components/Panels.css";
 
 export default function App() {
-  const wsUrl = import.meta.env.VITE_WS_URL || 'ws://calculation-service:8080/events'
+  const wsUrl =
+    import.meta.env.VITE_WS_URL || "ws://calculation-service:8080/events";
   const sim = useMachineSimulator({
-    wsUrl
-  })
+    wsUrl,
+  });
 
-  useSupabaseRealtime({
-    onEmployeePerformance: (payload) => {
-      console.log('EMP PERF', payload)
-    },
-    onMachinePerformance: (payload) => {
-      console.log('MACHINE PERF', payload)
-    },
-    onProductionLog: (payload) => {
-      console.log('LOG', payload)
-    }
-  })
   return (
     <>
       <TopBar machineId={sim.machineId} wsStatus="WebSocket Connecté" />
@@ -39,16 +28,18 @@ export default function App() {
         <div className="grid">
           <div className="leftCol">
             <NFCPanel
-  factoryId={sim.factoryId}
-  machineId={sim.machineId}
-  employee={sim.session.employee}
-  sessionStart={sim.session.startedAt}
-  canScan={!sim.session.active}
-  onScan={sim.actions.scanNFC}
-  onDisconnect={sim.actions.disconnectEmployee}
-  canDisconnect={sim.machine.state === 'IDLE' || sim.machine.state === 'OFFLINE'} // <-- ajoute ceci
-/>
-            
+              factoryId={sim.factoryId}
+              machineId={sim.machineId}
+              employee={sim.session.employee}
+              sessionStart={sim.session.startedAt}
+              canScan={!sim.session.active}
+              onScan={sim.actions.scanNFC}
+              onDisconnect={sim.actions.disconnectEmployee}
+              canDisconnect={
+                sim.machine.state === "IDLE" || sim.machine.state === "OFFLINE"
+              } // <-- ajoute ceci
+            />
+
             <ControlPanel
               state={sim.machine.state}
               canStart={sim.guards.canStart}
@@ -68,7 +59,6 @@ export default function App() {
           </div>
 
           <div className="rightCol">
-            
             <MachineStatusCard
               title="Machine de Production #3"
               subtitle="CNC - Tour Automatique"
@@ -103,5 +93,5 @@ export default function App() {
         <UserGuide />
       </div>
     </>
-  )
+  );
 }

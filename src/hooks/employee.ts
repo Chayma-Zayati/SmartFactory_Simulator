@@ -37,7 +37,7 @@ interface employeeGlobalPerformance{
 const useEmployee = () => {
     const [employee, setEmployee] = useState<Employee | null>(null);
     const [globalPerformance, setGlobalPerformance] = useState<employeeGlobalPerformance | null>(null);
-    const setStatus = async (status: string) => {
+    const setEmpStatus = async (status: string) => {
         if (employee) {
             
             try {
@@ -63,6 +63,8 @@ const useEmployee = () => {
             console.error("Error fetching employee:", error);
         }
     }
+
+    
     const setEmployeeDailyPerformance = async (performanceData: employeePerformance) => {
         try {
             const { data, error } = await supabase.from('employee_performance').insert(performanceData);
@@ -128,7 +130,7 @@ const useEmployee = () => {
         }
     }
 
-    return { employee, setStatus, fetchEmployee, setEmployeeDailyPerformance, fetchEmployeeGlobalPerformance, updateEmployeeGlobalPerformance };
+    return { employee, setEmpStatus, fetchEmployee, setEmployeeDailyPerformance, fetchEmployeeGlobalPerformance, updateEmployeeGlobalPerformance };
 
 }
    
